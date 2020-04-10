@@ -7,11 +7,6 @@ namespace modelpp
   {
     using parent = PARENT;
 
-    parent* get_parent(MODEL* ptr)
-    {
-      return dynamic_cast<parent*>(ptr);
-    }
-
     using fields_type_ptr = typename metadata_t<MODEL>::fields_type_ptr;
     //using fields_map = std::map<std::string, fields_type_ptr>;
 
