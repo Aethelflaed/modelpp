@@ -45,7 +45,8 @@ namespace modelpp
       template<HasMetadata MODEL>
         void load(MODEL* m, const std::map<std::string, fields_type>& data)
         {
-          const metadata_t<MODEL>& meta = MODEL::metadata;
+          const auto& meta = MODEL::metadata;
+
           for (const auto& field : meta.fields)
           {
             if (auto it = data.find(field.first); it != data.end())
@@ -78,7 +79,7 @@ namespace modelpp
       template<HasMetadata MODEL>
         std::map<std::string, fields_type> save(MODEL* m, std::map<std::string, fields_type> data)
         {
-          const metadata_t<MODEL>& meta = MODEL::metadata;
+          const auto& meta = MODEL::metadata;
 
           for (const auto& field : meta.fields)
           {
