@@ -5,8 +5,6 @@
 namespace modelpp
 {
   using field_types = fields<int, std::string>;
-
-  using field_types_t = field_types::type;
 }
 
 #include "modelpp/model.hpp"

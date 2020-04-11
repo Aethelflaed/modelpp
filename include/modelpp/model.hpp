@@ -9,6 +9,7 @@
 
 namespace modelpp
 {
+  using field_types_t =   field_types::type;
   using fields_map =      std::unordered_map<std::string, field_types_t>;
   using field_change =    std::pair<field_types_t, field_types_t>;
   using fields_changes =  std::unordered_map<std::string, field_change>;
