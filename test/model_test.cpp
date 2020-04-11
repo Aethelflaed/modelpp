@@ -16,8 +16,8 @@ BOOST_AUTO_TEST_CASE(test_load)
       {"name", "answer"}
     });
 
-  BOOST_CHECK(name() == "answer");
   BOOST_CHECK(id() == 42);
+  BOOST_CHECK(name() == "answer");
 }
 
 BOOST_AUTO_TEST_CASE(test_changes)
