@@ -1,47 +1,45 @@
 #pragma once
 
-#include "inherited_metadata.hpp"
-
 namespace modelpp
 {
-  class inherited_model : public virtual model
+  template<class MODEL>
+    concept HasParentModel = IsModel<MODEL> &&
+    std::is_convertible_v<typename MODEL::parent_model*, model*>;
+
+  class inherited_model
   {
     public:
-      template <HasMetadata MODEL>
-        void load(MODEL* m, const std::map<std::string, fields_type>& data)
+      template <IsModel MODEL>
+        void load(MODEL* m, const fields_map& data)
         {
-          this->model::load(m, data);
+          m->model::load(m, data);
         }
 
-      template<HasInheritedMetadata MODEL>
-        void load(MODEL* m, const std::map<std::string, fields_type>& data)
+      template<HasParentModel MODEL>
+        void load(MODEL* m, const fields_map& data)
         {
-          using parent = decltype(MODEL::metadata)::parent;
-
-          this->model::load(m, data);
-          this->load(dynamic_cast<parent*>(m), data);
+          m->model::load(m, data);
+          this->load(dynamic_cast<MODEL::parent_model*>(m), data);
         }
 
-      template<HasMetadata MODEL>
-        std::map<std::string, fields_type> save(MODEL* m, std::map<std::string, fields_type> data)
+      template<IsModel MODEL>
+        fields_map data(MODEL* m, fields_map data)
         {
-          return this->model::save(m, std::move(data));
+          return m->model::data(m, std::move(data));
         }
 
-      template<HasInheritedMetadata MODEL>
-        std::map<std::string, fields_type> save(MODEL* m)
+      template<HasParentModel MODEL>
+        fields_map data(MODEL* m)
         {
-          return this->save(m, std::map<std::string, fields_type>());
+          return this->data(m, {});
         }
 
-      template<HasInheritedMetadata MODEL>
-        std::map<std::string, fields_type> save(MODEL* m, std::map<std::string, fields_type> data)
+      template<HasParentModel MODEL>
+        fields_map data(MODEL* m, fields_map data)
         {
-          using parent = decltype(MODEL::metadata)::parent;
+          data = m->model::data(m, std::move(data));
 
-          data = this->model::save(m, std::move(data));
-
-          return this->save(dynamic_cast<parent*>(m), std::move(data));
+          return this->data(dynamic_cast<MODEL::parent_model*>(m), std::move(data));
         }
   };
 }

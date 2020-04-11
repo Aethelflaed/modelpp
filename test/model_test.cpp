@@ -13,7 +13,7 @@ BOOST_AUTO_TEST_CASE(test_load)
 
   load(dynamic_cast<model_a*>(this), {
       {"id", 42},
-      {"name", std::string{"answer"}}
+      {"name", "answer"}
     });
 
   BOOST_CHECK(name() == "answer");
