@@ -20,7 +20,7 @@ namespace modelpp
 
       metadata_t& field(const std::string& name, members_ptr_t ptr)
       {
-        fields[name] = ptr;
+        fields.insert_or_assign(name, ptr);
         return *this;
       }
 
@@ -31,5 +31,4 @@ namespace modelpp
   template<class MODEL>
     concept HasMetadata = 
         std::is_convertible_v<decltype(MODEL::metadata)&, metadata_t<MODEL>&>;
-
 }
