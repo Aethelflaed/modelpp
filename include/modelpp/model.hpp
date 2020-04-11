@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include <map>
+#include <unordered_map>
 #include <utility>
 #include <type_traits>
 
@@ -9,12 +9,16 @@
 
 namespace modelpp
 {
+  using fields_map =      std::unordered_map<std::string, field_types_t>;
+  using field_change =    std::pair<field_types_t, field_types_t>;
+  using fields_changes =  std::unordered_map<std::string, field_change>;
+
   class model
   {
     public:
       bool changed() const
       {
-        return changes_.empty();
+        return !changes_.empty();
       }
 
       bool changed(const std::string& field_name) const
@@ -22,7 +26,7 @@ namespace modelpp
         return changes_.contains(field_name);
       }
 
-      const std::map<std::string, std::pair<fields_type, fields_type>>& changes()
+      const fields_changes& changes()
       {
         return changes_;
       }
@@ -36,14 +40,13 @@ namespace modelpp
           }
           else
           {
-            changes_.emplace(std::make_pair(field, std::make_pair(*field_addr, value)));
+            changes_.emplace(field, std::make_pair(*field_addr, value));
           }
           *field_addr = value;
         }
 
-
       template<HasMetadata MODEL>
-        void load(MODEL* m, const std::map<std::string, fields_type>& data)
+        void load(MODEL* m, const fields_map& data)
         {
           const auto& meta = MODEL::metadata;
 
@@ -55,10 +58,11 @@ namespace modelpp
                 [&m, &field]
                 (auto&& arg)
                 {
-                  using type = typename std::remove_cvref<decltype(arg)>::type;
-                  if (std::holds_alternative<type MODEL::*>(field.second))
+                  using type = member_ptr_t<MODEL, decltype(arg)>;
+
+                  if (std::holds_alternative<type>(field.second))
                   {
-                    auto field_ptr = std::get<type MODEL::*>(field.second);
+                    auto field_ptr = std::get<type>(field.second);
                     m->*field_ptr = arg;
                   }
                 };
@@ -71,13 +75,13 @@ namespace modelpp
         }
 
       template<HasMetadata MODEL>
-        std::map<std::string, fields_type> save(MODEL* m)
+        fields_map data(MODEL* m)
         {
-          return save(m, std::map<std::string, fields_type>());
+          return data(m, {});
         }
 
       template<HasMetadata MODEL>
-        std::map<std::string, fields_type> save(MODEL* m, std::map<std::string, fields_type> data)
+        fields_map data(MODEL* m, fields_map data)
         {
           const auto& meta = MODEL::metadata;
 
@@ -97,7 +101,7 @@ namespace modelpp
         }
 
     private:
-      std::map<std::string, std::pair<fields_type, fields_type>> changes_;
+      fields_changes changes_;
   };
 }
 

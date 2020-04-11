@@ -5,27 +5,27 @@ namespace modelpp
   template<class MODEL>
     struct metadata_t
     {
-      using fields_type_ptr = typename fields_type_t::member_ptr<MODEL>::type;
-      using fields_map = std::map<std::string, fields_type_ptr>;
+      using members_ptr_t = typename field_types::member_ptr<MODEL>::type;
+      using members_ptr_map = std::map<std::string, members_ptr_t>;
 
       metadata_t(const std::string& name)
         :name{name}, fields{}
       {
       }
 
-      metadata_t(const std::string& name, fields_map fields)
+      metadata_t(const std::string& name, members_ptr_map fields)
         :name{name}, fields{fields}
       {
       }
 
-      metadata_t& field(const std::string& name, fields_type_ptr ptr)
+      metadata_t& field(const std::string& name, members_ptr_t ptr)
       {
         fields[name] = ptr;
         return *this;
       }
 
       std::string name;
-      fields_map fields;
+      members_ptr_map fields;
     };
 
   template<class MODEL>
