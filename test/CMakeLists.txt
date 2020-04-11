@@ -21,10 +21,12 @@ function(create_test file)
     WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG}
     )
 
-  setup_target_for_coverage_lcov(
-    NAME coverage_${test_name}
-    EXECUTABLE ${CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG}/${test_name}
-    )
+  if (LCOV_PATH)
+    setup_target_for_coverage_lcov(
+      NAME coverage_${test_name}
+      EXECUTABLE ${CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG}/${test_name}
+      )
+  endif()
 
   set(file_to_binary_info
     "${CMAKE_CURRENT_SOURCE_DIR}/${file}:${CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG}/${test_name}")
