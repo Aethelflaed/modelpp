@@ -103,5 +103,9 @@ namespace modelpp
     private:
       fields_changes changes_;
   };
+
+  template <class MODEL>
+    concept IsModel = std::is_convertible_v<MODEL*, model*> &&
+    HasMetadata<MODEL>;
 }
 
