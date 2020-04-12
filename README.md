@@ -56,7 +56,7 @@ class model_a : public modelpp::model
     }
 
     // Provides the definition of the different fields
-    static modelpp::metadata_t<model_a> metadata;
+    static modelpp::metadata<model_a> metadata;
 
   private:
     int id_;
@@ -70,9 +70,9 @@ the fields and to link them to the model.
 It should be defined in only one translation unit per target:
 
 ```c++
-modelpp::metadata_t<model_a> model_a::metadata{
+modelpp::metadata<model_a> model_a::metadata{
   // construct a new object
-  modelpp::metadata_t<model_a>("model_a")
+  modelpp::metadata<model_a>("model_a")
     // call field(name, member_ptr) for each neede field
     .field("id", &model_a::id_)
     .field("name", &model_a::name_)
@@ -80,7 +80,7 @@ modelpp::metadata_t<model_a> model_a::metadata{
 
 // alternative syntax, by providing the map directly
 
-modelpp::metadata_t<model_b> model_b::metadata{
+modelpp::metadata<model_b> model_b::metadata{
   "model_b",
   {
     {"id", &model_a::id_},
@@ -155,7 +155,7 @@ class model_b : public model_a, public modelpp::inherited_model
     using parent_model = model_a;
 
     // again, define the metadata
-    static modelpp::metadata_t<model_b> metadata;
+    static modelpp::metadata<model_b> metadata;
 
   private:
     std::string title_;
@@ -163,7 +163,7 @@ class model_b : public model_a, public modelpp::inherited_model
 
 // define the metadata, but you don't need to specify the parent model fields
 // only once, again:
-modelpp::metadata_t<model_b> model_b::metadata{"model_b", {{"title", &model_b::title_}}};
+modelpp::metadata<model_b> model_b::metadata{"model_b", {{"title", &model_b::title_}}};
 ```
 
 Then you can use it (almost) the same way, you just have to resolve the ambiguity

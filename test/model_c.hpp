@@ -10,11 +10,11 @@ class model_c : public model_b
 
     using parent_model = model_b;
 
-    static modelpp::metadata_t<model_c> metadata;
+    static modelpp::metadata<model_c> metadata;
 
   private:
     int number_;
 };
 
-modelpp::metadata_t<model_c> model_c::metadata{"model_c", {{"number", &model_c::number_}}};
+modelpp::metadata<model_c> model_c::metadata{"model_c", {{"number", &model_c::number_}}};
 

@@ -18,15 +18,15 @@ class model_a : public modelpp::model
     const std::string& name() const     { return name_; }
     void name(const std::string& value) { change("name", &name_, value); }
 
-    static modelpp::metadata_t<model_a> metadata;
+    static modelpp::metadata<model_a> metadata;
 
   private:
     int id_;
     std::string name_;
 };
 
-modelpp::metadata_t<model_a> model_a::metadata{
-  modelpp::metadata_t<model_a>("model_a")
+modelpp::metadata<model_a> model_a::metadata{
+  modelpp::metadata<model_a>("model_a")
     .field("id", &model_a::id_)
     .field("name", &model_a::name_)
 };

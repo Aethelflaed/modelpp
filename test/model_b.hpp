@@ -17,11 +17,11 @@ class model_b : public model_a, public modelpp::inherited_model
 
     using parent_model = model_a;
 
-    static modelpp::metadata_t<model_b> metadata;
+    static modelpp::metadata<model_b> metadata;
 
   private:
     std::string title_;
 };
 
-modelpp::metadata_t<model_b> model_b::metadata{"model_b", {{"title", &model_b::title_}}};
+modelpp::metadata<model_b> model_b::metadata{"model_b", {{"title", &model_b::title_}}};
 
