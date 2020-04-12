@@ -84,19 +84,19 @@ namespace modelpp
         {
           const auto& meta = MODEL::metadata;
 
-          for (const auto& field : meta.fields)
+          for (const auto& [field, variant]: meta.fields)
           {
-            if (auto it = data.find(field.first); it != data.end())
+            if (auto it = data.find(field); it != data.end())
             {
               auto lambda =
-                [&m, &field]
+                [&m, &variant]
                 (auto&& arg)
                 {
                   using type = member_ptr_t<MODEL, decltype(arg)>;
 
-                  if (std::holds_alternative<type>(field.second))
+                  if (std::holds_alternative<type>(variant))
                   {
-                    auto field_ptr = std::get<type>(field.second);
+                    auto field_ptr = std::get<type>(variant);
                     m->*field_ptr = arg;
                   }
                 };
@@ -134,16 +134,16 @@ namespace modelpp
         {
           const auto& meta = MODEL::metadata;
 
-          for (const auto& field : meta.fields)
+          for (const auto& [field, variant]: meta.fields)
           {
             auto lambda =
               [&m, &data, &field]
               (auto arg)
               {
-                data[field.first] = m->*arg;
+                data[field] = m->*arg;
               };
 
-            std::visit(lambda, field.second);
+            std::visit(lambda, variant);
           }
 
           return data;

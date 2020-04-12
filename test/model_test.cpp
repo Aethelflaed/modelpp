@@ -35,19 +35,19 @@ BOOST_AUTO_TEST_CASE(test_changes)
   id(42);
   BOOST_CHECK(changed("id"));
 
-  auto id_changes = changes().at("id");
+  auto [old, newv] = changes().at("id");
 
-  BOOST_CHECK(std::get<int>(id_changes.first) == 420);
-  BOOST_CHECK(std::get<int>(id_changes.second) == 42);
+  BOOST_CHECK(std::get<int>(old) == 420);
+  BOOST_CHECK(std::get<int>(newv) == 42);
 
   id(1);
 
   BOOST_CHECK(changed("id"));
 
-  id_changes = changes().at("id");
+  std::tie(old, newv) = changes().at("id");
 
-  BOOST_CHECK(std::get<int>(id_changes.first) == 420);
-  BOOST_CHECK(std::get<int>(id_changes.second) == 1);
+  BOOST_CHECK(std::get<int>(old) == 420);
+  BOOST_CHECK(std::get<int>(newv) == 1);
 }
 
 BOOST_AUTO_TEST_CASE(test_data)
