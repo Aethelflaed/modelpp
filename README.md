@@ -208,7 +208,6 @@ method you should call.
 
 - provides support for nullable data with `std::optional`
 - handle containers
-- comment / doc
 - validation module?
 - macros for data/load to remove the need for `MODEL*` arg?
 - data/load with explicit template parameter?
