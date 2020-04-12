@@ -14,6 +14,9 @@ namespace modelpp
         {
           using type = std::variant<ARGS MODEL::* ...>;
         };
+
+      template<class MODEL>
+      using member_ptr_t = member_ptr<MODEL>::type;
     };
 
   template<class MODEL, class TYPE>
