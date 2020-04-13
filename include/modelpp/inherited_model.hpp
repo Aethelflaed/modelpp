@@ -47,17 +47,6 @@ namespace modelpp
        *
        * \see model::data()
        */
-      template<HasParentModel MODEL>
-        fields_map data(MODEL* m)
-        {
-          return this->data(m, {});
-        }
-
-      /**
-       * Export data from the model
-       *
-       * \see model::data()
-       */
       template<IsModel MODEL>
         fields_map data(MODEL* m, fields_map data)
         {
@@ -69,7 +58,7 @@ namespace modelpp
        * Export the current model and merge with the parent data
        */
       template<HasParentModel MODEL>
-        fields_map data(MODEL* m, fields_map data)
+        fields_map data(MODEL* m, fields_map data = {})
         {
           data = m->model::data(m, std::move(data));
 

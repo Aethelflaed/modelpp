@@ -109,19 +109,6 @@ namespace modelpp
         }
 
       /**
-       * Return the data this model represents
-       *
-       * \tparam MODEL A model which complies with \ref HasMetadata
-       *
-       * \param m Pointer to the model, to access the metadata
-       */
-      template<HasMetadata MODEL>
-        fields_map data(MODEL* m)
-        {
-          return data(m, {});
-        }
-
-      /**
        * Return the data this model represents, merging it in the given data
        *
        * \tparam MODEL A model which complies with \ref HasMetadata
@@ -130,7 +117,7 @@ namespace modelpp
        * \param data The data into which this model's data will be merged
        */
       template<HasMetadata MODEL>
-        fields_map data(MODEL* m, fields_map data)
+        fields_map data(MODEL* m, fields_map data = {})
         {
           const auto& meta = MODEL::metadata;
 
