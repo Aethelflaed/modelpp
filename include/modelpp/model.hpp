@@ -49,6 +49,11 @@ namespace modelpp
 
   /**
    * Parent class of all the model you want to define
+   *
+   * Subclasses should override save(fields_map) and load(fields_map).
+   *
+   * To enable inherited model load/export, subclasses should also define
+   * a type `parent_model` to their direct parent model.
    */
   class model
   {
@@ -135,7 +140,7 @@ namespace modelpp
        * Return the data this model represents
        *
        * Should be overriden by subclasses, which will generally just call
-       * \ref data(MODEL*)
+       * \ref data(MODEL*, fields_map)
        */
       virtual fields_map data(fields_map data = {}) = 0;
 
@@ -145,7 +150,7 @@ namespace modelpp
        * \tparam MODEL A model which complies with \ref HasMetadata
        *
        * \param m Pointer to the model, to access the metadata
-       * \param data The data into which this model's data will be merged
+       * \param model_data The data into which this model's data will be merged
        */
       template<HasMetadata MODEL>
         fields_map data(MODEL* m, fields_map model_data = {})
