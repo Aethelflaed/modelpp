@@ -1,4 +1,4 @@
-# model++
+# model++ ![CI](https://github.com/Aethelflaed/modelpp/workflows/CI/badge.svg?branch=master)
 
 `model++` is a C++20 library containing various modules used to easily represent data models.
 
@@ -8,6 +8,8 @@ stored in a database.
 
 This library provides absolutely no feature related to data storage, but could
 easily be used in such a project.
+
+[Documentation](https://aethelflaed.github.io/modelpp/namespacemodelpp.html)
 
 ## Install
 
