@@ -114,7 +114,7 @@ model.id(420);
 model.changed("id"); // true
 model.changed("name"); // false
 
-model.load({{"id", 42}, {"name", "answer"}});
+model.load({ {"id", 42}, {"name", "answer"} });
 
 model.changed(); // false
 
@@ -181,7 +181,7 @@ class model_b : public model_a
 
 // define the metadata, but you don't need to specify the parent model fields
 // only once, again:
-modelpp::metadata<model_b> model_b::metadata{"model_b", {{"title", &model_b::title_}}};
+modelpp::metadata<model_b> model_b::metadata{"model_b", { {"title", &model_b::title_} } };
 ```
 
 ## `load()`/`data()` first parameter and call ambiguity
