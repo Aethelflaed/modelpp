@@ -12,6 +12,8 @@ class model_c : public model_b
 
     static modelpp::metadata<model_c> metadata;
 
+    MODELPP_IMPLEMENT_METHODS()
+
   private:
     int number_;
 };

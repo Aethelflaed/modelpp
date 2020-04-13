@@ -38,6 +38,16 @@ namespace modelpp
     HasMetadata<MODEL>;
 
   /**
+   * Check that the given model respects \ref IsModel and defines a
+   * `parent_model` type that does too
+   *
+   * \tparam MODEL
+   */
+  template<class MODEL>
+    concept HasParentModel = IsModel<MODEL> &&
+    IsModel<typename MODEL::parent_model>;
+
+  /**
    * Parent class of all the model you want to define
    */
   class model
@@ -72,6 +82,14 @@ namespace modelpp
       /**
        * Load the given data in the model
        *
+       * Should be overriden by subclasses, which will generally just call
+       * \ref load(MODEL*, const fields_map&)
+       */
+      virtual void load(const fields_map& data) = 0;
+
+      /**
+       * Load the given data in the model
+       *
        * \post \ref changes() will be empty
        *
        * \tparam MODEL A model which complies with \ref HasMetadata
@@ -82,6 +100,11 @@ namespace modelpp
       template<HasMetadata MODEL>
         void load(MODEL* m, const fields_map& data)
         {
+          if constexpr (HasParentModel<MODEL>)
+          {
+            load(dynamic_cast<MODEL::parent_model*>(m), data);
+          }
+
           const auto& meta = MODEL::metadata;
 
           for (const auto& [field, variant]: meta.fields)
@@ -109,6 +132,14 @@ namespace modelpp
         }
 
       /**
+       * Return the data this model represents
+       *
+       * Should be overriden by subclasses, which will generally just call
+       * \ref data(MODEL*)
+       */
+      virtual fields_map data(fields_map data = {}) = 0;
+
+      /**
        * Return the data this model represents, merging it in the given data
        *
        * \tparam MODEL A model which complies with \ref HasMetadata
@@ -117,23 +148,28 @@ namespace modelpp
        * \param data The data into which this model's data will be merged
        */
       template<HasMetadata MODEL>
-        fields_map data(MODEL* m, fields_map data = {})
+        fields_map data(MODEL* m, fields_map model_data = {})
         {
+          if constexpr (HasParentModel<MODEL>)
+          {
+            model_data = data(dynamic_cast<MODEL::parent_model*>(m), std::move(model_data));
+          }
+
           const auto& meta = MODEL::metadata;
 
           for (const auto& [field, variant]: meta.fields)
           {
             auto lambda =
-              [&m, &data, &field]
+              [&m, &model_data, &field]
               (auto arg)
               {
-                data[field] = m->*arg;
+                model_data[field] = m->*arg;
               };
 
             std::visit(lambda, variant);
           }
 
-          return data;
+          return model_data;
         }
 
     protected:
@@ -166,3 +202,19 @@ namespace modelpp
   };
 }
 
+#define MODELPP_IMPLEMENT_LOAD() \
+    virtual void load(const modelpp::fields_map& data) override\
+    {\
+      modelpp::model::load(this, data);\
+    }
+
+#define MODELPP_IMPLEMENT_DATA() \
+    virtual modelpp::fields_map data(modelpp::fields_map data = {}) override\
+    {\
+      return modelpp::model::data(this, std::move(data));\
+    }
+
+
+#define MODELPP_IMPLEMENT_METHODS() \
+  MODELPP_IMPLEMENT_LOAD()\
+  MODELPP_IMPLEMENT_DATA()

@@ -1,9 +1,8 @@
 #pragma once
 
 #include "model_a.hpp"
-#include "modelpp/inherited_model.hpp"
 
-class model_b : public model_a, public modelpp::inherited_model
+class model_b : public model_a
 {
   public:
     std::string title() const
@@ -18,6 +17,8 @@ class model_b : public model_a, public modelpp::inherited_model
     using parent_model = model_a;
 
     static modelpp::metadata<model_b> metadata;
+
+    MODELPP_IMPLEMENT_METHODS()
 
   private:
     std::string title_;

@@ -58,11 +58,26 @@ class model_a : public modelpp::model
     // Provides the definition of the different fields
     static modelpp::metadata<model_a> metadata;
 
+    // implement load virtual methods
+    // can be replaced by MODELPP_IMPLEMENT_LOAD()
+    virtual void load(const modelpp::fields_map& data) override
+    { modelpp::model::load(this, data); }
+
+    // implement data virtual methods
+    // can be replaced by MODELPP_IMPLEMENT_DATA()
+    virtual modelpp::fields_map data(modelpp::fields_map data = {}) override
+    { return modelpp::model::data(this, std::move(data)); }
+
+    // both methods can be replaced by MODELPP_IMPLEMENT_METHODS()
+
   private:
     int id_;
     std::string name_;
 };
 ```
+
+The `data()` and `load()` method simplify the call to the underlying template
+method call, which will in turn use the metadata.
 
 The static variable declaration is needed to provide the actual definition of
 the fields and to link them to the model.
@@ -99,8 +114,7 @@ model.id(420);
 model.changed("id"); // true
 model.changed("name"); // false
 
-// the first parameter is needed to get the model_a class
-model.load(&model, {{"id", 42}, {"name", "answer"}});
+model.load({{"id", 42}, {"name", "answer"}});
 
 model.changed(); // false
 
@@ -109,9 +123,8 @@ model.name(); // "answer"
 
 model.name("question");
 
-// same as load, data needs the model_a class
 // it returns an unordered_map<string, std::variant<field_types>>
-for (const auto& field_value : model.data(&model))
+for (const auto& field_value : model.data())
 {
   std::cout << field.first << ": ";
   // std::visit can be used to call the lambda on the correct variant value
@@ -131,14 +144,17 @@ std::get<std::string>(name_change.second);
 
 ## Inheritance
 
-```c++
-// include inherited_model
-#include "modelpp/inherited_model.hpp"
+Simply inherit from your base model, then you'll need to define the new fields
+AND a new metadata static member.
 
-// inherit from both your base class and inherited_model
-// if you want another class to inherit from model_b, it will not need to
-// inherit from inherited_model again
-class model_b : public model_a, public modelpp::inherited_model
+You must define a type `parent_model` to represent the parent model which data
+will be loaded / exported along the new model.
+
+The `data()`/`load()` method need to be overriden again to call the generic
+method with the right type.
+
+```c++
+class model_b : public model_a
 {
   public:
     std::string title() const
@@ -157,6 +173,8 @@ class model_b : public model_a, public modelpp::inherited_model
     // again, define the metadata
     static modelpp::metadata<model_b> metadata;
 
+    MODELPP_IMPLEMENT_METHODS()
+
   private:
     std::string title_;
 };
@@ -164,16 +182,6 @@ class model_b : public model_a, public modelpp::inherited_model
 // define the metadata, but you don't need to specify the parent model fields
 // only once, again:
 modelpp::metadata<model_b> model_b::metadata{"model_b", {{"title", &model_b::title_}}};
-```
-
-Then you can use it (almost) the same way, you just have to resolve the ambiguity
-when calling `data()` or `load()`:
-
-```c++
-model.inherited_model::data(&model)
-
-// or, in the class definition:
-using inherited_model::data;
 ```
 
 ## `load()`/`data()` first parameter and call ambiguity
@@ -209,6 +217,5 @@ method you should call.
 - provides support for nullable data with `std::optional`
 - handle containers
 - validation module?
-- macros for data/load to remove the need for `MODEL*` arg?
-- data/load with explicit template parameter?
 - provide overload for `change(field, member_ptr_t, value)` to deduce `member_ptr_t`?
+- callback support?
