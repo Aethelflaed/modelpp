@@ -26,6 +26,8 @@ conan_basic_setup()
 # during compilation
 include_directories(${CMAKE_SOURCE_DIR}/include)
 
+add_subdirectory(${CMAKE_SOURCE_DIR}/doc)
+
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
   enable_testing()
 
