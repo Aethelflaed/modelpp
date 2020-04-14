@@ -142,7 +142,7 @@ namespace modelpp
        * Should be overriden by subclasses, which will generally just call
        * \ref data(MODEL*, fields_map)
        */
-      virtual fields_map data(fields_map data = {}) = 0;
+      virtual fields_map data(fields_map data = {}) const = 0;
 
       /**
        * Return the data this model represents, merging it in the given data
@@ -153,11 +153,11 @@ namespace modelpp
        * \param model_data The data into which this model's data will be merged
        */
       template<HasMetadata MODEL>
-        fields_map data(MODEL* m, fields_map model_data = {})
+        fields_map data(const MODEL* m, fields_map model_data = {}) const
         {
           if constexpr (HasParentModel<MODEL>)
           {
-            model_data = data(dynamic_cast<MODEL::parent_model*>(m), std::move(model_data));
+            model_data = data(dynamic_cast<const MODEL::parent_model*>(m), std::move(model_data));
           }
 
           const auto& meta = MODEL::metadata;
@@ -214,7 +214,7 @@ namespace modelpp
     }
 
 #define MODELPP_IMPLEMENT_DATA() \
-    virtual modelpp::fields_map data(modelpp::fields_map data = {}) override\
+    virtual modelpp::fields_map data(modelpp::fields_map data = {}) const override\
     {\
       return modelpp::model::data(this, std::move(data));\
     }

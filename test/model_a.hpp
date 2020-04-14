@@ -23,7 +23,7 @@ class model_a : public modelpp::model
     virtual void load(const modelpp::fields_map& data) override
     { modelpp::model::load(this, data); }
 
-    virtual modelpp::fields_map data(modelpp::fields_map data = {}) override
+    virtual modelpp::fields_map data(modelpp::fields_map data = {}) const override
     { return modelpp::model::data(this, std::move(data)); }
   private:
     int id_;
