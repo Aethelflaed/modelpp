@@ -55,4 +55,27 @@ namespace modelpp
    */
   template<class MODEL, class TYPE>
     using member_ptr_t = typename member_ptr<MODEL, TYPE>::type;
+
+  /**
+   * Define member_type for specialization
+   */
+  template<class T>
+    struct member_type : std::false_type
+  {
+  };
+
+  /**
+   * Extract the field type from a member pointer
+   */
+  template<class T, class U>
+    struct member_type<T U::*>
+    {
+      using type = T;
+    };
+
+  /**
+   * Short-hand for member_type<T U::*>::type
+   */
+  template<class T>
+  using member_type_t = typename member_type<T>::type;
 }
