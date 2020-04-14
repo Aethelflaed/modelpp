@@ -12,7 +12,7 @@ namespace modelpp
     struct metadata
     {
       using members_ptr_t = typename field_types::member_ptr_t<MODEL>;
-      using members_ptr_map = std::map<std::string, members_ptr_t>;
+      using members_ptr_map = std::unordered_map<std::string, members_ptr_t>;
 
       /**
        * Construct a metadata by providing the model name
