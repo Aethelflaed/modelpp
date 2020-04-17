@@ -62,7 +62,7 @@ class model_a : public modelpp::model
 
     // implement load virtual methods
     // can be replaced by MODELPP_IMPLEMENT_LOAD()
-    virtual void load(const modelpp::fields_map& data) override
+    virtual void load(const modelpp::fields_map& data) const override
     { modelpp::model::load(this, data); }
 
     // implement data virtual methods
