@@ -219,5 +219,4 @@ method you should call.
 - provides support for nullable data with `std::optional`
 - handle containers
 - validation module?
-- provide overload for `change(field, member_ptr_t, value)` to deduce `member_ptr_t`?
 - callback support?
