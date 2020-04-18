@@ -186,15 +186,6 @@ class model_b : public model_a
 modelpp::metadata<model_b> model_b::metadata{"model_b", { {"title", &model_b::title_} } };
 ```
 
-## `load()`/`data()` first parameter and call ambiguity
-
-You generally won't call these methods from everywhere, and usually limit that
-to a place where you make database or web API calls, so it's quite easy
-to provide the first parameter.
-
-For the ambiguity, you can use the `HasParentModel` concept to check which
-method you should call.
-
 ## Design goals
 
 - Simple interface
