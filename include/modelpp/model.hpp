@@ -105,31 +105,73 @@ namespace modelpp
       template<HasMetadata MODEL>
         void load(MODEL* m, const fields_map& data)
         {
+          auto lambda =
+            []
+            (auto& it, auto arg)
+            {
+              // deduce the field type from its pointer and get the value
+              // held in it->second (which is a std::variant)
+              return std::get<member_type_t<decltype(arg)>>(it->second);
+            };
+
+          load(m, data, lambda);
+        }
+
+      /**
+       * Load the given data in the model using lambda
+       *
+       * \post \ref changes() will be empty
+       *
+       * \tparam MODEL A model which complies with \ref HasMetadata
+       * \tparam MAP A map of field -> values
+       * \tparam LAMBDA The lambda type
+       *
+       * \param m Pointer to the model, to access the metadata
+       * \param data The data to load into the model
+       * \param lambda A lambda called for each field, with an iterator to the
+       *  corresponding field in `data` and the field pointer as parameter.
+       *  This lambda should return a value suitable to be assigned to the
+       *  instance variable.
+       *
+       * \see load(MODEL*, const fields_map&) for an example of a lambda to use
+       *
+       * Another example which could work with
+       * [nlohmann::json](https://github.com/nlohmann/json):
+       * \code{.cpp}
+       * auto lambda =
+       *    []
+       *    // the second parameter, the field pointer, is ignored
+       *    (auto& it, auto)
+       *    {
+       *      // If you're sure the value is compatible:
+       *      return *it;
+       *      // otherwise you'll have to validate and cast the input.
+       *    };
+       * \endcode
+       */
+      template<HasMetadata MODEL, class MAP, class LAMBDA>
+        void load(MODEL* m, const MAP& data, LAMBDA& lambda)
+        {
           if constexpr (HasParentModel<MODEL>)
           {
-            load(dynamic_cast<MODEL::parent_model*>(m), data);
+            load(dynamic_cast<MODEL::parent_model*>(m), data, lambda);
           }
 
           const auto& meta = MODEL::metadata;
 
-          for (const auto& [field, variant]: meta.fields)
+          for (auto& [field, variant]: meta.fields)
           {
-            if (auto it = data.find(field); it != data.end())
+            if (const auto it = data.find(field); it != data.end())
             {
-              auto lambda =
-                [&m, &variant]
-                (auto&& arg)
+              // This is the lambda actually assigning the value
+              auto lmb =
+                [&lambda, &it, &m]
+                (auto arg)
                 {
-                  using type = member_ptr_t<MODEL, decltype(arg)>;
-
-                  if (std::holds_alternative<type>(variant))
-                  {
-                    auto field_ptr = std::get<type>(variant);
-                    m->*field_ptr = arg;
-                  }
+                  (*m).*arg = lambda(it, arg);
                 };
 
-              std::visit(lambda, it->second);
+              std::visit(lmb, variant);
             }
           }
 
@@ -140,7 +182,7 @@ namespace modelpp
        * Return the data this model represents
        *
        * Should be overriden by subclasses, which will generally just call
-       * \ref data(MODEL*, fields_map)
+       * \ref data(const MODEL*, fields_map) const
        */
       virtual fields_map data(fields_map data = {}) const = 0;
 
