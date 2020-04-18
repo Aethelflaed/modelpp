@@ -82,6 +82,12 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmodelpp_1_1member__ptr.html">member_ptr</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute a pointer to a member field of type TYPE in class MODEL.  <a href="structmodelpp_1_1member__ptr.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmodelpp_1_1member__type.html">member_type</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define <a class="el" href="structmodelpp_1_1member__type.html" title="Define member_type for specialization.">member_type</a> for specialization.  <a href="structmodelpp_1_1member__type.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmodelpp_1_1member__type_3_01T_01U_1_1_5_01_4.html">member_type&lt; T U::* &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extract the field type from a member pointer.  <a href="structmodelpp_1_1member__type_3_01T_01U_1_1_5_01_4.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmodelpp_1_1metadata.html">metadata</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the metadata of the given MODEL.  <a href="structmodelpp_1_1metadata.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -95,6 +101,10 @@ Typedefs</h2></td></tr>
 <tr class="memitem:ae6eb83e884895a83ee7539c68da7eb62"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemodelpp.html#ae6eb83e884895a83ee7539c68da7eb62">member_ptr_t</a> = typename <a class="el" href="structmodelpp_1_1member__ptr.html">member_ptr</a>&lt; MODEL, TYPE &gt;::type</td></tr>
 <tr class="memdesc:ae6eb83e884895a83ee7539c68da7eb62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Short-hand for <a class="el" href="structmodelpp_1_1member__ptr.html#ae55d14c9e08c4a61dc3dc0ddf79bf21f">member_ptr&lt;MODEL, TYPE&gt;::type</a>.  <a href="namespacemodelpp.html#ae6eb83e884895a83ee7539c68da7eb62">More...</a><br /></td></tr>
 <tr class="separator:ae6eb83e884895a83ee7539c68da7eb62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c4f290e30e0bd893b2ae730bfbedc35"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a4c4f290e30e0bd893b2ae730bfbedc35"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemodelpp.html#a4c4f290e30e0bd893b2ae730bfbedc35">member_type_t</a> = typename <a class="el" href="structmodelpp_1_1member__type.html">member_type</a>&lt; T &gt;::type</td></tr>
+<tr class="memdesc:a4c4f290e30e0bd893b2ae730bfbedc35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Short-hand for <a class="el" href="structmodelpp_1_1member__type_3_01T_01U_1_1_5_01_4.html#a3d992f3fe0b0b76808feac1a66fc83a3">member_type&lt;T U::*&gt;::type</a>.  <a href="namespacemodelpp.html#a4c4f290e30e0bd893b2ae730bfbedc35">More...</a><br /></td></tr>
+<tr class="separator:a4c4f290e30e0bd893b2ae730bfbedc35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa20e2a3833474147d375d31cbc0d9ad6"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemodelpp.html#aa20e2a3833474147d375d31cbc0d9ad6">field_types_t</a> = field_types::type</td></tr>
 <tr class="memdesc:aa20e2a3833474147d375d31cbc0d9ad6"><td class="mdescLeft">&#160;</td><td class="mdescRight">The registered types in a variant.  <a href="namespacemodelpp.html#aa20e2a3833474147d375d31cbc0d9ad6">More...</a><br /></td></tr>
 <tr class="separator:aa20e2a3833474147d375d31cbc0d9ad6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -205,6 +215,24 @@ template&lt;class MODEL , class TYPE &gt; </div>
 </div><div class="memdoc">
 
 <p>Short-hand for <a class="el" href="structmodelpp_1_1member__ptr.html#ae55d14c9e08c4a61dc3dc0ddf79bf21f">member_ptr&lt;MODEL, TYPE&gt;::type</a>. </p>
+
+</div>
+</div>
+<a id="a4c4f290e30e0bd893b2ae730bfbedc35"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c4f290e30e0bd893b2ae730bfbedc35">&#9670;&nbsp;</a></span>member_type_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespacemodelpp.html#a4c4f290e30e0bd893b2ae730bfbedc35">modelpp::member_type_t</a> = typedef typename <a class="el" href="structmodelpp_1_1member__type.html">member_type</a>&lt;T&gt;::type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Short-hand for <a class="el" href="structmodelpp_1_1member__type_3_01T_01U_1_1_5_01_4.html#a3d992f3fe0b0b76808feac1a66fc83a3">member_type&lt;T U::*&gt;::type</a>. </p>
 
 </div>
 </div>

@@ -85,15 +85,15 @@ $(function() {
 Public Types</h2></td></tr>
 <tr class="memitem:aee9de50586be4d2c16529a43caf16b9d"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmodelpp_1_1metadata.html#aee9de50586be4d2c16529a43caf16b9d">members_ptr_t</a> = typename field_types::member_ptr_t&lt; MODEL &gt;</td></tr>
 <tr class="separator:aee9de50586be4d2c16529a43caf16b9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3bfa1aabc95c40ea11d5d0423f78e96c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmodelpp_1_1metadata.html#a3bfa1aabc95c40ea11d5d0423f78e96c">members_ptr_map</a> = std::map&lt; std::string, <a class="el" href="structmodelpp_1_1metadata.html#aee9de50586be4d2c16529a43caf16b9d">members_ptr_t</a> &gt;</td></tr>
-<tr class="separator:a3bfa1aabc95c40ea11d5d0423f78e96c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94c311695859330b06c702d56e7a8bc2"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmodelpp_1_1metadata.html#a94c311695859330b06c702d56e7a8bc2">members_ptr_map</a> = std::unordered_map&lt; std::string, <a class="el" href="structmodelpp_1_1metadata.html#aee9de50586be4d2c16529a43caf16b9d">members_ptr_t</a> &gt;</td></tr>
+<tr class="separator:a94c311695859330b06c702d56e7a8bc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a45c863c3fae10341a34af9996d43cab0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmodelpp_1_1metadata.html#a45c863c3fae10341a34af9996d43cab0">metadata</a> (const std::string &amp;<a class="el" href="structmodelpp_1_1metadata.html#a2cc00fad61288577e38c85257cabc517">name</a>)</td></tr>
 <tr class="memdesc:a45c863c3fae10341a34af9996d43cab0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a metadata by providing the model name.  <a href="structmodelpp_1_1metadata.html#a45c863c3fae10341a34af9996d43cab0">More...</a><br /></td></tr>
 <tr class="separator:a45c863c3fae10341a34af9996d43cab0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7477da63cf6de8a2214ff579ac592db4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmodelpp_1_1metadata.html#a7477da63cf6de8a2214ff579ac592db4">metadata</a> (const std::string &amp;<a class="el" href="structmodelpp_1_1metadata.html#a2cc00fad61288577e38c85257cabc517">name</a>, <a class="el" href="structmodelpp_1_1metadata.html#a3bfa1aabc95c40ea11d5d0423f78e96c">members_ptr_map</a> <a class="el" href="structmodelpp_1_1fields.html">fields</a>)</td></tr>
+<tr class="memitem:a7477da63cf6de8a2214ff579ac592db4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmodelpp_1_1metadata.html#a7477da63cf6de8a2214ff579ac592db4">metadata</a> (const std::string &amp;<a class="el" href="structmodelpp_1_1metadata.html#a2cc00fad61288577e38c85257cabc517">name</a>, <a class="el" href="structmodelpp_1_1metadata.html#a94c311695859330b06c702d56e7a8bc2">members_ptr_map</a> <a class="el" href="structmodelpp_1_1fields.html">fields</a>)</td></tr>
 <tr class="memdesc:a7477da63cf6de8a2214ff579ac592db4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a metadata by providing the model name and a map of the field names associated to their pointer.  <a href="structmodelpp_1_1metadata.html#a7477da63cf6de8a2214ff579ac592db4">More...</a><br /></td></tr>
 <tr class="separator:a7477da63cf6de8a2214ff579ac592db4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac7cb50a37ca859006e4ea81a720236cb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structmodelpp_1_1metadata.html">metadata</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmodelpp_1_1metadata.html#ac7cb50a37ca859006e4ea81a720236cb">field</a> (const std::string &amp;<a class="el" href="structmodelpp_1_1metadata.html#a2cc00fad61288577e38c85257cabc517">name</a>, <a class="el" href="structmodelpp_1_1metadata.html#aee9de50586be4d2c16529a43caf16b9d">members_ptr_t</a> ptr)</td></tr>
@@ -105,7 +105,7 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a2cc00fad61288577e38c85257cabc517"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmodelpp_1_1metadata.html#a2cc00fad61288577e38c85257cabc517">name</a></td></tr>
 <tr class="memdesc:a2cc00fad61288577e38c85257cabc517"><td class="mdescLeft">&#160;</td><td class="mdescRight">Model name.  <a href="structmodelpp_1_1metadata.html#a2cc00fad61288577e38c85257cabc517">More...</a><br /></td></tr>
 <tr class="separator:a2cc00fad61288577e38c85257cabc517"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af5aa05fbbd69e99be44d1588a06e8555"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structmodelpp_1_1metadata.html#a3bfa1aabc95c40ea11d5d0423f78e96c">members_ptr_map</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmodelpp_1_1metadata.html#af5aa05fbbd69e99be44d1588a06e8555">fields</a></td></tr>
+<tr class="memitem:af5aa05fbbd69e99be44d1588a06e8555"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structmodelpp_1_1metadata.html#a94c311695859330b06c702d56e7a8bc2">members_ptr_map</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmodelpp_1_1metadata.html#af5aa05fbbd69e99be44d1588a06e8555">fields</a></td></tr>
 <tr class="memdesc:af5aa05fbbd69e99be44d1588a06e8555"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map associating a field name to its member pointer.  <a href="structmodelpp_1_1metadata.html#af5aa05fbbd69e99be44d1588a06e8555">More...</a><br /></td></tr>
 <tr class="separator:af5aa05fbbd69e99be44d1588a06e8555"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -116,8 +116,8 @@ struct modelpp::metadata&lt; MODEL &gt;</h3>
 <p>Represents the metadata of the given MODEL. </p>
 <p>An instance of this class needs stored as a static member of the model with the name <code>metadata</code>, so the rest of the library can access it. </p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
-<a id="a3bfa1aabc95c40ea11d5d0423f78e96c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3bfa1aabc95c40ea11d5d0423f78e96c">&#9670;&nbsp;</a></span>members_ptr_map</h2>
+<a id="a94c311695859330b06c702d56e7a8bc2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94c311695859330b06c702d56e7a8bc2">&#9670;&nbsp;</a></span>members_ptr_map</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -125,7 +125,7 @@ struct modelpp::metadata&lt; MODEL &gt;</h3>
 template&lt;class MODEL &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="structmodelpp_1_1metadata.html">modelpp::metadata</a>&lt; MODEL &gt;::<a class="el" href="structmodelpp_1_1metadata.html#a3bfa1aabc95c40ea11d5d0423f78e96c">members_ptr_map</a> =  std::map&lt;std::string, <a class="el" href="structmodelpp_1_1metadata.html#aee9de50586be4d2c16529a43caf16b9d">members_ptr_t</a>&gt;</td>
+          <td class="memname">using <a class="el" href="structmodelpp_1_1metadata.html">modelpp::metadata</a>&lt; MODEL &gt;::<a class="el" href="structmodelpp_1_1metadata.html#a94c311695859330b06c702d56e7a8bc2">members_ptr_map</a> =  std::unordered_map&lt;std::string, <a class="el" href="structmodelpp_1_1metadata.html#aee9de50586be4d2c16529a43caf16b9d">members_ptr_t</a>&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -202,7 +202,7 @@ template&lt;class MODEL &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structmodelpp_1_1metadata.html#a3bfa1aabc95c40ea11d5d0423f78e96c">members_ptr_map</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="structmodelpp_1_1metadata.html#a94c311695859330b06c702d56e7a8bc2">members_ptr_map</a>&#160;</td>
           <td class="paramname"><em>fields</em>&#160;</td>
         </tr>
         <tr>
@@ -288,7 +288,7 @@ template&lt;class MODEL &gt; </div>
 template&lt;class MODEL &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structmodelpp_1_1metadata.html#a3bfa1aabc95c40ea11d5d0423f78e96c">members_ptr_map</a> <a class="el" href="structmodelpp_1_1metadata.html">modelpp::metadata</a>&lt; MODEL &gt;::<a class="el" href="structmodelpp_1_1fields.html">fields</a></td>
+          <td class="memname"><a class="el" href="structmodelpp_1_1metadata.html#a94c311695859330b06c702d56e7a8bc2">members_ptr_map</a> <a class="el" href="structmodelpp_1_1metadata.html">modelpp::metadata</a>&lt; MODEL &gt;::<a class="el" href="structmodelpp_1_1fields.html">fields</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
