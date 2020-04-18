@@ -35,6 +35,7 @@ endfunction()
 
 create_test(model_test.cpp)
 create_test(inherited_model_test.cpp)
+create_test(container_test.cpp)
 
 list(JOIN TEST_FILE_TO_BINARY "\n" TEST_FILE_TO_BINARY)
 file(WRITE "${CMAKE_BINARY_DIR}/file_to_binary" "${TEST_FILE_TO_BINARY}\n")
