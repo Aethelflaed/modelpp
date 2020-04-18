@@ -203,7 +203,7 @@ modelpp::metadata<model_b> model_b::metadata{"model_b", { {"title", &model_b::ti
 ## Bugs
 
 - At the moment, `std::variant` has troubles handling `bool` and `std:optional`,
-  as identified in [P0608R3](www.open-std.org/jtc1/sc22/wg21/docs/papers/2018/p0608r3.html)
+  as identified in [P0608R3](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2018/p0608r3.html)
 
 ## TODO
 
