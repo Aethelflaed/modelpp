@@ -233,15 +233,18 @@ namespace modelpp
       template<class MEMBER_PTR, class VALUE_TYPE>
         void change(const std::string& field, MEMBER_PTR* member_addr, VALUE_TYPE value)
         {
-          if (auto it = changes_.find(field); it != changes_.end())
+          if (*member_addr != value)
           {
-            it->second.second = value;
+            if (auto it = changes_.find(field); it != changes_.end())
+            {
+              it->second.second = value;
+            }
+            else
+            {
+              changes_.emplace(field, std::make_pair(*member_addr, value));
+            }
+            *member_addr = value;
           }
-          else
-          {
-            changes_.emplace(field, std::make_pair(*member_addr, value));
-          }
-          *member_addr = value;
         }
 
     private:

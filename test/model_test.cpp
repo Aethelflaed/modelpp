@@ -68,4 +68,13 @@ BOOST_AUTO_TEST_CASE(test_data)
   BOOST_CHECK(std::get<std::string>(model_data.at("name")) == "answer");
 }
 
+BOOST_AUTO_TEST_CASE(test_change_identity)
+{
+  id(42);
+  load(data());
+
+  id(42);
+  BOOST_CHECK(! changed());
+}
+
 BOOST_AUTO_TEST_SUITE_END()
